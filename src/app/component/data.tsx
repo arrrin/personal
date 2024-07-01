@@ -85,7 +85,7 @@ const Details = () => {
 
       <section>
         <h3 className="text-xl font-semibold mb-2">Education</h3>
-        <p className="font-semibold">Bachelor of Computer Engineering, King Mongkut's Institute of Technology Ladkrabang</p>
+        <p className="font-semibold">Bachelor of Computer Engineering, King Mongkuts Institute of Technology Ladkrabang</p>
         <p className="italic mb-2">April 2024 - Second-class honor</p>
         <p className="font-semibold">Relevant Skills and Knowledge</p>
         <ul className="list-disc list-inside">
