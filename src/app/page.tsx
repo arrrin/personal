@@ -1,9 +1,8 @@
-import NavigationBar from "./component/navigation-bar";
+import Details from "./component/data";
 export default function Home() {
   return (
-    <main className="flex    p-24">
-      
-      <h1>test</h1>
+    <main className="flex ">
+      <Details />
     </main>
   );
 }
