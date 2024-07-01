@@ -1,11 +1,24 @@
-// components/ArinSalapsi.js
+'use client';
 import React from 'react';
 
 const Details = () => {
+  
+  const copy = () => {
+    navigator.clipboard.writeText('autio-auto@hotmail.com');
+  }
   return (
     <div className="font-sans m-5">
       <h1 className="text-3xl font-bold mb-4">Arin Salapsi</h1>
       <h2 className="text-2xl mb-4">Currently Software Developer at Knoware Learning</h2>
+
+      <section>
+        <h3 className="text-xl font-semibold mb-2">Contact me</h3>
+        <ul className="list-disc list-inside mb-4">
+          <li ><a className='hover:underline hover:text-sky-300 me-2' href='mailto:autio-auto@hotmail.com'>Email : autio-auto@hotmail.com</a>
+          <button onClick={copy} className='border px-1 rounded-lg hover:bg-white hover:text-black'>copy</button></li>
+        </ul>
+        
+      </section>
 
       <section>
         <h3 className="text-xl font-semibold mb-2">📘 Quick Overview</h3>
