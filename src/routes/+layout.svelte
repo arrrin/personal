@@ -12,7 +12,6 @@
     box-sizing: border-box;
     color: rgb(var(--foreground-rgb));
     height: 100vh;
-    border: 1px solid white;
   }
 
 </style>
