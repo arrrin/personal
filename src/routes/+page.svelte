@@ -1,51 +1,76 @@
 <script lang="ts">
- import  gsap from 'gsap';
- import { ScrollTrigger } from 'gsap/dist/ScrollTrigger';
+  import gsap from "gsap";
+  import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
   import Data from "../component/data.svelte";
   import Nav from "../component/nav.svelte";
   import { onMount } from "svelte";
 
-  let box: HTMLDivElement;
-  
+  let box: HTMLElement;
+
   onMount(() => {
-    const sections = gsap.utils.toArray(".panel");
+    let sections = gsap.utils.toArray(".panel") as gsap.DOMTarget[],
+      currentSection = sections[0];
+
     gsap.registerPlugin(ScrollTrigger);
-    sections.forEach((section: any, index: number) => {
-      gsap.fromTo(
-        section,
-        { opacity: 0, y: 50 },
-        {
-          opacity: 1,
-          y: 0,
-          duration: 1,
-          scrollTrigger: {
-            pin:true,
-            trigger: section,
-            start: "top 80%",
-            end: "top 30%",
-            toggleActions: "play none none reverse",
-            markers: true,
-          },
-        }
-      );
+    gsap.defaults({ overwrite: "auto", duration: 0.3});
+    function setSection(newSection: any) {
+      if (newSection !== currentSection) {
+        // gsap.to(currentSection, { opacity: 0 , autoAlpha: 0 });
+        // gsap.to(newSection, { opacity: 1, autoAlpha: 1 });
+        currentSection = newSection;
+      }
+    }
+
+    sections.forEach((section, i) => {
+
+      ScrollTrigger.create({
+        // use dynamic scroll positions based on the window height (offset by half to make it feel natural)
+        start: () => {
+          return (i - 0.2) * innerHeight;
+        },
+        end: () => (i + 1) * innerHeight,
+        // when a new section activates (from either direction), set the section accordinglyl.
+        onToggle: (self) => self.isActive && setSection(section),
+      });
     });
+
   });
 </script>
 
-<main class="flex flex-col h-[500%] flex-nowrap">
-  <div bind:this={box} class="h-screen p-10 panel">
-    <div class="h-full border-2 flex flex-col grow border-box">
+<main class="flex flex-col h-[300%] flex-nowrap container">
+  <section class="h-screen p-10 panel info-panel first ">
+    <div class="h-full  flex flex-col grow border-box">
+      1
       <Data />
       <Nav />
     </div>
-  </div>
-  <div bind:this={box} class="h-screen p-10 panel">
+  </section>
+  <section class=" h-screen p-10 panel experience-panel">
     <div class="h-full border-2 flex flex-col grow border-box">
+      2
       <Data />
       <Nav />
     </div>
-  </div>
+  </section>
+  <section class="h-screen p-10 panel faq-panel">
+    <div class="h-full border-2 flex flex-col grow border-box">
+      3
+      <Data />
+      <Nav />
+    </div>
+  </section>
+  <section class="h-screen p-10 panel faq-panel">
+    <div class="h-full border-2 flex flex-col grow border-box">
+      4
+      <Data />
+      <Nav />
+    </div>
+  </section>
 </main>
 
 <style>
+  section:not(.first) {
+  /* opacity: 0; */
+  /* visibility: hidden; */
+} 
 </style>
