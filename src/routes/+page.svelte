@@ -20,6 +20,16 @@
         currentSection = newSection;
       }
     }
+    ScrollTrigger.create({
+      trigger: ".info-panel",
+      start: "top top",
+      end: "bottom",
+      pin: ".info-panel",
+      markers:true,
+      scrub: true,
+      snap:1/ (sections.length -1 ),
+      pinSpacing:true,
+    });
 
     sections.forEach((section, i) => {
 
@@ -46,7 +56,7 @@
     </div>
   </section>
   <section class=" h-screen p-10 panel experience-panel">
-    <div class="h-full border-2 flex flex-col grow border-box">
+    <div class="h-full  flex flex-col grow border-box">
       2
       <Data />
       <Nav />
