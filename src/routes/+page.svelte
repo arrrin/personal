@@ -4,6 +4,7 @@
   import Data from "../component/data.svelte";
   import Nav from "../component/nav.svelte";
   import { onMount } from "svelte";
+  import Header from "../component/header.svelte";
 
   let container: HTMLElement;
 
@@ -11,7 +12,16 @@
     gsap.registerPlugin(ScrollTrigger);
 
     let panels = gsap.utils.toArray(".panel");
-    
+    let openTimeline = gsap.timeline({});
+    openTimeline.to(".opening", {
+      duration: 2,
+      yPercent:-100,
+      ease: "power4",
+    });
+    openTimeline.to(".opening", {
+      opacity: 0  ,
+    });
+
     panels.forEach((panel:any, i) => {
       ScrollTrigger.create({
         trigger: panel as Element,
@@ -21,34 +31,19 @@
         pinSpacing: false,
       });
 
-      if (i !== 0) {
-        gsap.fromTo(panel, 
-  {  opacity: 1 },
-  {
-    yPercent: 0,
-    opacity: 1,
-    scrollTrigger: {
-      trigger: panel as Element,
-      start: "top bottom",
-      end: "top center",
-      scrub: true,
-    }
-  }
-);
-      }
     });
   });
 </script>
 
 <main bind:this={container} class="scroll-container">
-  <section class="panel info-panel">
-    <div class="panel-content">
-      1
-      <Data />
-      <Nav />
+  <section class="fixed top-0 left-0 h-screen w-screen bg-blue-dark z-10 opening">
+  </section>
+  <section class="panel info-panel bg-black ">
+    <div class="panel-content ">
+      <Header />
     </div>
   </section>
-  <section class="panel experience-panel">
+  <section class="panel experience-panel bg-blue">
     <div class="panel-content">
       2
       <Data />
@@ -88,17 +83,13 @@
     height: 100vh;
     width: 100%;
     display: flex;
+    padding-left: 20px;
     justify-content: center;
     align-items: center;
-    position: relative;
+    position: relative; 
   }
   
   .panel-content {
-    width: 80%;
-    height: 80%;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-radius: 10px;
-    padding: 20px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
   }
 </style>
