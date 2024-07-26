@@ -5,72 +5,65 @@
   import Nav from "../component/nav.svelte";
   import { onMount } from "svelte";
 
-  let box: HTMLElement;
+  let container: HTMLElement;
 
   onMount(() => {
-    let sections = gsap.utils.toArray(".panel") as gsap.DOMTarget[],
-      currentSection = sections[0];
-
     gsap.registerPlugin(ScrollTrigger);
-    gsap.defaults({ overwrite: "auto", duration: 0.3});
-    function setSection(newSection: any) {
-      if (newSection !== currentSection) {
-        // gsap.to(currentSection, { opacity: 0 , autoAlpha: 0 });
-        // gsap.to(newSection, { opacity: 1, autoAlpha: 1 });
-        currentSection = newSection;
-      }
-    }
-    ScrollTrigger.create({
-      trigger: ".info-panel",
-      start: "top top",
-      end: "bottom",
-      pin: ".info-panel",
-      markers:true,
-      scrub: true,
-      snap:1/ (sections.length -1 ),
-      pinSpacing:true,
-    });
 
-    sections.forEach((section, i) => {
-
+    let panels = gsap.utils.toArray(".panel");
+    
+    panels.forEach((panel:any, i) => {
       ScrollTrigger.create({
-        // use dynamic scroll positions based on the window height (offset by half to make it feel natural)
-        start: () => {
-          return (i - 0.2) * innerHeight;
-        },
-        end: () => (i + 1) * innerHeight,
-        // when a new section activates (from either direction), set the section accordinglyl.
-        onToggle: (self) => self.isActive && setSection(section),
+        trigger: panel as Element,
+        start: "top top",
+        end: "bottom top",
+        
+        pinSpacing: false,
       });
-    });
 
+      if (i !== 0) {
+        gsap.fromTo(panel, 
+  {  opacity: 1 },
+  {
+    yPercent: 0,
+    opacity: 1,
+    scrollTrigger: {
+      trigger: panel as Element,
+      start: "top bottom",
+      end: "top center",
+      scrub: true,
+    }
+  }
+);
+      }
+    });
   });
 </script>
 
-<main class="flex flex-col h-[300%] flex-nowrap container">
-  <section class="h-screen p-10 panel info-panel first ">
-    <div class="h-full  flex flex-col grow border-box">
+<main bind:this={container} class="scroll-container">
+  <section class="panel info-panel">
+    <div class="panel-content">
       1
       <Data />
       <Nav />
     </div>
   </section>
-  <section class=" h-screen p-10 panel experience-panel">
-    <div class="h-full  flex flex-col grow border-box">
+  <section class="panel experience-panel">
+    <div class="panel-content">
       2
       <Data />
       <Nav />
     </div>
   </section>
-  <section class="h-screen p-10 panel faq-panel">
-    <div class="h-full border-2 flex flex-col grow border-box">
+  <section class="panel faq-panel">
+    <div class="panel-content">
       3
       <Data />
       <Nav />
     </div>
   </section>
-  <section class="h-screen p-10 panel faq-panel">
-    <div class="h-full border-2 flex flex-col grow border-box">
+  <section class="panel faq-panel">
+    <div class="panel-content">
       4
       <Data />
       <Nav />
@@ -79,8 +72,33 @@
 </main>
 
 <style>
-  section:not(.first) {
-  /* opacity: 0; */
-  /* visibility: hidden; */
-} 
+  :global(body, html) {
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  .scroll-container {
+    height: 100vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+  
+  .panel {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
+  
+  .panel-content {
+    width: 80%;
+    height: 80%;
+    background-color: rgba(255, 255, 255, 0.8);
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
 </style>
