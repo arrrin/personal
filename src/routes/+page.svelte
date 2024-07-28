@@ -5,30 +5,28 @@
   import Nav from "../component/nav.svelte";
   import { onMount } from "svelte";
   import Header from "../component/header.svelte";
+  import TextWheel from "../component/text-wheel.svelte";
 
   onMount(() => {
-    // gsap.registerPlugin(ScrollTrigger);
-    // let panels = gsap.utils.toArray(".panel");
+    gsap.registerPlugin(ScrollTrigger);
+    let panels = gsap.utils.toArray(".panel");
     let openTimeline = gsap.timeline({});
     openTimeline.to(".opening", {
       duration: 2,
-      height:0,
+      height: 0,
       ease: "power4",
     });
 
-// console.log(panels)
-    // panels.forEach((panel: any, i) => {
-    //   ScrollTrigger.create({
-    //     trigger: panel as Element,
-    //     start: "top top",
-    //     end: "bottom top",
-    //     pinSpacing: false,
-    //   });
-    // });
-    return () => {
-      openTimeline.revert();
-    // ScrollTrigger.getAll().forEach(trigger => trigger.kill());
-  };
+    panels.forEach((panel: any, i) => {
+      ScrollTrigger.create({
+        trigger: panel as Element,
+        start: "top top",
+        end: "bottom top",
+        // snap: 1,
+        pinSpacing: false,
+        pin: true,
+      });
+    });
   });
 </script>
 
@@ -36,8 +34,8 @@
   <section
     class="top-0 absolute left-0 h-screen w-screen bg-blue-dark z-10 opening"
   ></section>
-  
-  <section class="panel info-panel bg-black">
+  <TextWheel></TextWheel>
+  <section class="home info-panel bg-black">
     <div class="panel-content">
       <Header />
     </div>
@@ -56,9 +54,9 @@
       <Nav />
     </div>
   </section>
-  <section id="contact-section" class="panel faq-panel">
+  <section id="contact-section" class="panel contact-panel">
     <div class="panel-content">
-      4
+      contact
       <Data />
       <Nav />
     </div>
@@ -86,5 +84,13 @@
     align-items: center;
     position: relative;
   }
-
+  .home {
+    height: 100vh;
+    width: 100%;
+    display: flex;
+    padding-left: 20px;
+    justify-content: center;
+    align-items: center;
+    position: relative;
+  }
 </style>

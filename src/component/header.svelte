@@ -13,7 +13,7 @@
   onMount(() => {
     let tl = gsap.timeline({
       defaults: { duration: 4, ease: "power2" },
-      repeat: 20,
+      repeat: -1,
     });
     let headerTimeline = gsap.timeline({});
     gsap.registerPlugin(TextPlugin, ScrollTrigger);
@@ -44,27 +44,42 @@
       },
       "<"
     );
-    const panel2 =  document.querySelector('.experience-panel')
+    const panel2 = document.querySelector(".experience-panel");
+
     const headerTitle = gsap.timeline({
       scrollTrigger: {
         trigger: panel2,
         start: "top top",
-        end: () => panel2!.scrollHeight ,
-        pin:true,
+        end: () => panel2!.scrollHeight,
+        pin: true,
         scrub: 1,
+        onLeave: () => {
+          console.log("first");
+        },
+      },
+    });
+    const wheelTl = gsap.timeline({
+      scrollTrigger: {
+        trigger: panel2,
+        start: "top top",
+        end: () => panel2!.scrollHeight,
+        // pin: true,
         markers: true, // Remove this in production
-        onLeave:()=>{console.log('first')}
+        onLeave: () => {
+          console.log("first");
+        },
       },
     });
     const header = gsap.timeline({
       scrollTrigger: {
         trigger: ".header",
         start: "top top",
-        end: () => panel2!.scrollHeight ,
-        pin:true,
+        end: () => panel2!.scrollHeight * 3,
+        pin: true,
         scrub: 1,
-        // markers: true, // Remove this in production
-        onLeave:()=>{console.log('first')}
+        onLeave: () => {
+          console.log("first");
+        },
       },
     });
 
@@ -74,17 +89,23 @@
       ease: "back",
       lazy: false,
     });
-    header.to(".header", {
-      duration: 4,
-      ease: "back",
-      lazy: false,
-    },'<');
-    headerTitle.to(".header", {
-      duration: 1,
-      text: "Experience",
-      lazy: false,
-    },);
+    header.to(
+      ".header",
+      {
+        duration: 2,
+        yPercent: -20,
+        ease: "back",
+        lazy: false,
+      },
+      "<"
+    );
 
+    headerTitle.to(".header", {
+      visibility: 'hidden',
+      lazy: false,
+      duration:1,
+    });
+      
     tl.to(
       ".roles",
       {
@@ -99,14 +120,13 @@
       text: "Computer Engineering.",
       ease: "back",
     });
-
   });
 </script>
 
-<div
-  class="flex flex-col justify-start mt-5 header-container"
->
-  <h1 class="text-[3em] md:text-[80px] mb-4 text-white header z-10">Arin Salapsi</h1>
+<div class="flex flex-col justify-center mt-5 header-container flex-nowrap">
+  <h1 class="text-[3em] md:text-[80px] mb-4 text-white header z-10 text-nowrap">
+    Arin Salapsi
+  </h1>
   <h2 class="text-2xl mb-4 text-white roles">Computer Engineering.</h2>
   <div class="flex flex-row mt-3">
     <button
