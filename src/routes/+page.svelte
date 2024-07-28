@@ -23,9 +23,8 @@
         trigger: panel as Element,
         start: "top top",
         end: "bottom top",
-        // snap: 1,
+        snap: 1/3,
         pinSpacing: false,
-        pin: true,
       });
     });
   });
@@ -41,12 +40,12 @@
       <Header />
     </div>
   </section>
-  <section class="panel experience-panel bg-blue">
+  <section class="panel experience-panel">
     <div class="panel-content">
       <Experience />
     </div>
   </section>
-  <section class="panel faq-panel">
+  <section class="panel faq-panel bg-white">
     <div class="panel-content">
       3
       <Data />
@@ -76,7 +75,7 @@
   }
 
   .panel {
-    height: 100vh;
+    height: 200vh;
     width: 100%;
     display: flex;
     padding-left: 20px;

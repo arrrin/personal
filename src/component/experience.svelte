@@ -1,9 +1,33 @@
-<div class="mt-auto mx-auto text-nowrap">
-  <pre>Lorem ipsum dolor sit amet consectetur 
-    adipisicing elit. Saepe qui voluptatum minus 
-    accusamus labore obcaecati molestiae non suscipit!
-     Rem maxime repellat, nisi expedita neque nihil beatae
-      eaque vero ab harum libero explicabo quis ipsum ipsam. 
-      Eum harum, sit sequi aperiam animi dolore deleniti magnam 
-        repudiandae tempora quis, laborum assumenda velit.</pre>
+<script lang="ts">
+  import { onMount } from "svelte";
+  import { ScrollTrigger } from "gsap/dist/ScrollTrigger";
+  import gsap from "gsap";
+  onMount(() => {
+    gsap.registerPlugin(ScrollTrigger);
+    gsap.defaults({ ease: "none" });
+  });
+</script>
+
+<div class="grid grid-cols-8">
+  <p class="text-white col-span-2 col-start-2">
+    King Mongkut's Institute of Technology Ladkrabang
+  </p>
+  <div class="w-1 h-full bg-white mx-auto"></div>
+  <div class=" col-span-3">
+    <p class="text-white">Bachelor of Computer Engineering</p>
+    <time class="text-white italic">May 2024</time>
+    <p class="text-white">GPA 3.39,</p>
+  </div>
+</div>
+<br>
+<div class="grid grid-cols-8">
+  <p class="text-white col-span-2 col-start-2">
+    King Mongkut's Institute of Technology Ladkrabang
+  </p>
+  <div class="w-1 h-full bg-white mx-auto"></div>
+  <div class=" col-span-3">
+    <p class="text-white">Bachelor of Computer Engineering</p>
+    <time class="text-white italic">May 2024</time>
+    <p class="text-white">GPA 3.39,</p>
+  </div>
 </div>
