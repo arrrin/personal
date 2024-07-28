@@ -6,40 +6,39 @@
   import { onMount } from "svelte";
   import Header from "../component/header.svelte";
 
-  let container: HTMLElement;
-
   onMount(() => {
-    gsap.registerPlugin(ScrollTrigger);
-
-    let panels = gsap.utils.toArray(".panel");
+    // gsap.registerPlugin(ScrollTrigger);
+    // let panels = gsap.utils.toArray(".panel");
     let openTimeline = gsap.timeline({});
     openTimeline.to(".opening", {
       duration: 2,
-      yPercent:-100,
+      height:0,
       ease: "power4",
     });
-    openTimeline.to(".opening", {
-      opacity: 0  ,
-    });
 
-    panels.forEach((panel:any, i) => {
-      ScrollTrigger.create({
-        trigger: panel as Element,
-        start: "top top",
-        end: "bottom top",
-        
-        pinSpacing: false,
-      });
-
-    });
+// console.log(panels)
+    // panels.forEach((panel: any, i) => {
+    //   ScrollTrigger.create({
+    //     trigger: panel as Element,
+    //     start: "top top",
+    //     end: "bottom top",
+    //     pinSpacing: false,
+    //   });
+    // });
+    return () => {
+      openTimeline.revert();
+    // ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+  };
   });
 </script>
 
-<main bind:this={container} class="scroll-container">
-  <section class="fixed top-0 left-0 h-screen w-screen bg-blue-dark z-10 opening">
-  </section>
-  <section class="panel info-panel bg-black ">
-    <div class="panel-content ">
+<main class="scroll-container">
+  <section
+    class="top-0 absolute left-0 h-screen w-screen bg-blue-dark z-10 opening"
+  ></section>
+  
+  <section class="panel info-panel bg-black">
+    <div class="panel-content">
       <Header />
     </div>
   </section>
@@ -57,7 +56,7 @@
       <Nav />
     </div>
   </section>
-  <section class="panel faq-panel">
+  <section id="contact-section" class="panel faq-panel">
     <div class="panel-content">
       4
       <Data />
@@ -70,15 +69,14 @@
   :global(body, html) {
     margin: 0;
     padding: 0;
-    overflow: hidden;
   }
 
   .scroll-container {
-    height: 100vh;
-    overflow-y: auto;
-    overflow-x: hidden;
+    /* height: 50000px; */
+    /* overflow-y: auto;
+    overflow-x: hidden; */
   }
-  
+
   .panel {
     height: 100vh;
     width: 100%;
@@ -86,10 +84,7 @@
     padding-left: 20px;
     justify-content: center;
     align-items: center;
-    position: relative; 
+    position: relative;
   }
-  
-  .panel-content {
 
-  }
 </style>
