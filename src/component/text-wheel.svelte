@@ -9,7 +9,7 @@
 
     const panel2 = document.querySelector(".experience-panel");
     gsap.set(".wheel ", {
-      autoAlpha: 1,
+      autoAlpha: 0,
       text: words.join(" "),
     });
     gsap.set(".wheel-container ", {
@@ -35,21 +35,32 @@
         gsap.set(".wheel-container", {
           zIndex: 20,
         });
+        gsap.set(".wheel ", {
+          autoAlpha: 1,
+          text: words.join(" "),
+        });
         horizontalScroll.play();
       },
       onLeave: () => {
         gsap.set(".wheel-container", {
           zIndex: 0,
         });
-        console.log("leave");
         horizontalScroll.pause();
       },
-      onEnterBack: () => horizontalScroll.play(),
+      onEnterBack: () => {
+        gsap.set(".wheel-container", {
+          zIndex: 20,
+        });
+        gsap.set(".wheel ", {
+          autoAlpha: 1,
+          text: words.join(" "),
+        });
+        horizontalScroll.play();
+      },
       onLeaveBack: () => {
         gsap.set(".wheel-container", {
           zIndex: 0,
         });
-        console.log("leave");
         horizontalScroll.pause();
       },
     });
@@ -57,10 +68,10 @@
 </script>
 
 <div
-  class="justify-center wheel-container z-10 flex-nowrap fixed left-1/2 transform -translate-x-1/2"
+  class="justify-center wheel-container z-10 flex-nowrap fixed left-1/2 bottom-0 transform -translate-x-1/2"
 >
   <h1
-    class="text-[3em] md:text-[80px] mb-4 text-white wheel relative text-nowrap"
+    class="text-[2em] md:text-[40px] mb-4 text-white wheel relative text-nowrap"
   >
     {""}
   </h1>

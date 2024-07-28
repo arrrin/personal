@@ -8,9 +8,8 @@
 
   :global(body) {
     margin: 0;
-    /* overflow: hidden; */
+    overflow-x: hidden;
     background-color: #002d7f;
-    padding: var(--padding);
     box-sizing: border-box;
     color: rgb(var(--foreground-rgb));
     height: 100vh;

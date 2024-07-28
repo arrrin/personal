@@ -6,6 +6,7 @@
   import { onMount } from "svelte";
   import Header from "../component/header.svelte";
   import TextWheel from "../component/text-wheel.svelte";
+  import Experience from "../component/experience.svelte";
 
   onMount(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -35,16 +36,14 @@
     class="top-0 absolute left-0 h-screen w-screen bg-blue-dark z-10 opening"
   ></section>
   <TextWheel></TextWheel>
-  <section class="home info-panel bg-black">
+  <section id="home" class="home info-panel bg-black">
     <div class="panel-content">
       <Header />
     </div>
   </section>
   <section class="panel experience-panel bg-blue">
     <div class="panel-content">
-      2
-      <Data />
-      <Nav />
+      <Experience />
     </div>
   </section>
   <section class="panel faq-panel">
@@ -57,7 +56,7 @@
   <section id="contact-section" class="panel contact-panel">
     <div class="panel-content">
       contact
-      <Data />
+      <!-- <Data /> -->
       <Nav />
     </div>
   </section>
@@ -67,6 +66,7 @@
   :global(body, html) {
     margin: 0;
     padding: 0;
+    background-color: black;
   }
 
   .scroll-container {
