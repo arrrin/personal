@@ -35,8 +35,9 @@
         gsap.set(".wheel-container", {
           zIndex: 20,
         });
-        gsap.set(".wheel ", {
+        gsap.to(".wheel ", {
           autoAlpha: 1,
+          duration:2,
           text: words.join(" "),
         });
         horizontalScroll.play();
@@ -45,15 +46,16 @@
         gsap.set(".wheel-container", {
           zIndex: 0,
         });
+    
         horizontalScroll.pause();
       },
       onEnterBack: () => {
         gsap.set(".wheel-container", {
-          zIndex: 20,
+          zIndex: 0,
         });
+      
         gsap.set(".wheel ", {
-          autoAlpha: 1,
-          text: words.join(" "),
+          autoAlpha: 0,
         });
         horizontalScroll.play();
       },
@@ -62,6 +64,9 @@
           zIndex: 0,
         });
         horizontalScroll.pause();
+        gsap.set(".wheel ", {
+          autoAlpha: 0,
+        });
       },
     });
   });

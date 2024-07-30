@@ -17,28 +17,7 @@
           scrub: 1,
         },
       });
-      ScrollTrigger.create({
-        trigger: ".uni",
-        start: "bottom center",
-        end: `${panel2!.scrollHeight*2} center`,
-        markers: true,
-        pin: ".uni",
-        scrub: 1,
-      });
-      ScrollTrigger.create({
-        trigger: ".uni-seperator",
-        start: "bottom center",
-        end: `${panel2!.scrollHeight*2} center`,
-        markers: true,
-        pin: ".uni-seperator",
-        scrub: 1,
-      });
       eduTl.to(".education-detail", {
-        autoAlpha: 0,
-        yPercent: -50,
-        duration: 4,
-      });
-      eduTl.to(".education-tool", {
         autoAlpha: 0,
         yPercent: -50,
         duration: 4,
@@ -49,25 +28,16 @@
 </script>
 
 <div class="flex flex-row education-container space-x-4">
-  <p class="text-white uni">
+  <p class="text-white uni opacity-0">
     King Mongkut's <br />Institute of Technology Ladkrabang
   </p>
-  <div class="w-px h-auto bg-white uni-seperator"></div>
-  {#if state === 0}
-  <div class="education-detail">
-    <p class="text-white">Bachelor of Computer Engineering</p>
-    <time class="text-white italic">May 2024</time>
-    <p class="text-white">GPA 3.39,</p>
-  </div>
-  {:else if state===1}
+  <div class="w-px h-auto bg-white uni-seperator opacity-0"></div>
   <div class="education-tools">
     <p class="text-white">Bachelor of Computer Engineering</p>
     <time class="text-white italic">May 2024</time>
     <p class="text-white">GPA 3.39,</p>
   </div>
-  {:else}
-    <p>No true Condition is true</p>
-  {/if}
+ 
   
 
 </div>

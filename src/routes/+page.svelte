@@ -7,6 +7,7 @@
   import Header from "../component/header.svelte";
   import TextWheel from "../component/text-wheel.svelte";
   import Experience from "../component/experience.svelte";
+  import Edu from "../component/edu.svelte";
 
   onMount(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -23,7 +24,6 @@
         trigger: panel as Element,
         start: "top top",
         end: "bottom top",
-        snap: 1/3,
         pinSpacing: false,
       });
     });
@@ -40,9 +40,19 @@
       <Header />
     </div>
   </section>
-  <section class="panel experience-panel">
+  <section class="panel h/12 experience-panel">
     <div class="panel-content">
-      <Experience />
+      <Experience  />
+    </div>
+  </section>
+  <section class="panel experience-panel-2">
+    <div class="panel-content">
+      <Edu />
+    </div>
+  </section>
+  <section class="panel project-panel">
+    <div class="panel-content">
+   
     </div>
   </section>
   <section class="panel faq-panel bg-white">

@@ -52,6 +52,7 @@
     header.to(".header", {
       duration: 1,
       scale: 0.3,
+      background:'#000',
       ease: "back",
     });
     header.to(
@@ -82,7 +83,7 @@
 </script>
 
 <div class="flex flex-col justify-center mt-5 header-container flex-nowrap">
-  <h1 class="text-[3em] md:text-[80px] mb-4 text-white header z-10 text-nowrap"  >
+  <h1 class="text-[3em] md:text-[80px] mb-4 text-white header z-10 text-nowrap"   >
    <button on:click={() => onContactClick("home")}>Arin Salapsi</button> 
   </h1>
   <h2 class="text-2xl mb-4 text-white roles">Computer Engineering.</h2>
